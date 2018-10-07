@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!--
+<VBox prefHeight="472.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.zura.JournalFilter.DirectoryController">
+-->
+<VBox prefHeight="472.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar prefHeight="8.0" prefWidth="640.0" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File">
+          <items>
+<!--
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+-->
+            <MenuItem fx:id="menuSelectInputDir" mnemonicParsing="false" onAction="#onSelectMenuInputDir" text="入力ディレクトリ..." />
+            <MenuItem fx:id="menuSelectOutputDir" mnemonicParsing="false" onAction="#onSelectMenuOutputDir" text="出力ディレクトリ..." />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem fx:id="menuQuitApplication" mnemonicParsing="false" onAction="#onSelectMenuQuitApplication" text="終了" />
+          </items>
+        </Menu>
+<!--
+        <Menu mnemonicParsing="false" text="Edit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+-->
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="421.0" prefWidth="640.0" VBox.vgrow="ALWAYS">
+      <children>
+            <Label fx:id="labelInputDir" layoutX="10.0" layoutY="12.0" prefHeight="17.0" prefWidth="114.0" text="入力ディレクトリ:" />
+            <TextField fx:id="locationInputDir" layoutX="129.0" layoutY="7.0" onDragDropped="#onDragDroppedInputDir" onDragOver="#onDragOverInputDir" prefHeight="27.0" prefWidth="461.0" promptText="入力ディレクトリ選択" />
+            <Button fx:id="openInputDirSelector" layoutX="596.0" layoutY="7.0" mnemonicParsing="false" onAction="#onClickOpenInputDirSelector" prefHeight="27.0" prefWidth="36.0" text="..." />
+
+            <Label fx:id="labelOutputDir" layoutX="10.0" layoutY="46.0" prefHeight="17.0" prefWidth="114.0" text="出力ディレクトリ:" />
+            <TextField fx:id="locationOutputDir" layoutX="129.0" layoutY="41.0" onDragDropped="#onDragDroppedOutputDir" onDragOver="#onDragOverOutputDir" prefHeight="27.0" prefWidth="461.0" promptText="出力ディレクトリ選択" />
+            <Button fx:id="openOutputDirSelector" layoutX="596.0" layoutY="41.0" mnemonicParsing="false" onAction="#onClickOpenOutputDirSelector" prefHeight="27.0" prefWidth="36.0" text="..." />
+
+            <Label fx:id="labelFormat" layoutX="10.0" layoutY="86.0" prefHeight="17.0" prefWidth="114.0" text="出力フォーマット:" />
+            <ChoiceBox fx:id="formatSelector" layoutX="129.0" layoutY="81.0" prefHeight="27.0" prefWidth="99.0" />
+
+            <Label fx:id="labelExtFilterPattern" layoutX="10.0" layoutY="123.0" text="拡張子パターン:" />
+            <ComboBox fx:id="selectExtRegexPattern" editable="true" layoutX="129.0" layoutY="118.0" prefHeight="27.0" prefWidth="501.0" promptText="抽出したいファイルの拡張子を正規表現で記述もしくは選択" />
+
+            <Label fx:id="labelEventFilterPattern" layoutX="11.0" layoutY="159.0" text="イベントパターン:" />
+            <ComboBox fx:id="selectEventRegexPattern" editable="true" layoutX="129.0" layoutY="154.0" prefHeight="27.0" prefWidth="501.0" promptText="抽出したいジャーナルのイベントを正規表現で記述もしくは選択" />
+
+            <Button fx:id="execFiltering" layoutX="524.0" layoutY="195.0" mnemonicParsing="false" onAction="#onClickExecFiltering" prefHeight="27.0" prefWidth="108.0" text="フィルタ実行" />
+
+            <TextArea fx:id="showResult" editable="false" layoutX="8.0" layoutY="231.0" prefHeight="171.0" prefWidth="623.0" wrapText="true" />
+
+            <ProgressBar fx:id="progressFiltering" layoutX="8.0" layoutY="409.0" prefHeight="20.0" prefWidth="623.0" progress="0.0" />
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

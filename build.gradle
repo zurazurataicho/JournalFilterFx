@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+mainClassName = 'org.zura.JournalFilter.Main'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-csv
+    compile group: 'org.apache.commons', name: 'commons-csv', version: '1.5'
+	// https://mvnrepository.com/artifact/commons-codec/commons-codec
+	compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    compile group: 'org.apache.poi', name: 'poi', version: '4.0.0'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.0'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas
+    compile group: 'org.apache.poi', name: 'poi-ooxml-schemas', version: '4.0.0'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-scratchpad
+	compile group: 'org.apache.poi', name: 'poi-scratchpad', version: '4.0.0'
+
+    // for JavaFX
+    compile files("${System.properties['java.home']}/lib/ext/jfxrt.jar")
+}
+
+run {
+	// https://qiita.com/opengl-8080/items/4c1aa85b4737bd362d9e
+	// gradle run -Pargs="hoge fuga piyo"
+	if (project.hasProperty('args')) {	// "args" というプロパティが渡されていたら
+		args project.args.split('\\s+')	// 空白文字で split して、 run タスクの args オプションにセットする
+	}
+}
+
+jar {
+	// java -jar build/libs/JournalFilter.jar xxx yyy
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+	from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}

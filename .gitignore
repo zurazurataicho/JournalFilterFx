@@ -1,0 +1,11 @@
+.git
+.DS_Store
+.localized
+/.gradle/
+/build/
+*.csv
+*.xlsx
+*.sample
+*.exe
+*.xml
+*.ico
