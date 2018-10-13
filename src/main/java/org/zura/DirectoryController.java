@@ -218,8 +218,6 @@ public class DirectoryController implements Initializable {
                             outFilepath = outDirectory + File.separator + buildOutputFilename(inFilepath, storeType);
                         }
                         numerator += 1;
-System.out.println(selectExtRegexPattern.getValue());
-System.out.println(selectEventRegexPattern.getValue());
                         filter.run(storeType, inFilepath, outFilepath, isAppend, selectExtRegexPattern.getValue(), selectEventRegexPattern.getValue());
                         Platform.runLater(createMessageUpdater(numerator, csvInFiles.size(), inFilepath, outFilepath));
                     }
